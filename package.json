@@ -1,7 +1,7 @@
 {
-  "name": "grace-app-template",
+  "name": "loop-spa",
   "version": "2.0.0",
-  "description": "Some boilerplate code to get you started!",
+  "description": "Laura's Loop coding challenge",
   "main": "index.js",
   "scripts": {
     "build": "webpack",
@@ -24,11 +24,14 @@
     "bcrypt": "^5.0.0",
     "compression": "^1.7.3",
     "express": "^4.16.4",
+    "got": "^11.8.2",
     "history": "^4.9.0",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.9.1",
+    "node-fetch": "^2.6.1",
     "pg": "^8.5.1",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "shopify-node-api": "^1.11.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
