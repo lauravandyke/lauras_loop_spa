@@ -3,9 +3,16 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchProducts } from "../store/products";
 import { fetchOrders } from "../store/orders";
-import ProductCard from "./ProductCard";
+
+import Pagination from "./Pagination";
+import SelectedProducts from "./SelectedProducts";
 
 class Products extends React.Component {
+  constructor() {
+    super();
+    this.state = { currentPage: 1, variants: [] };
+    this.paginate = this.paginate.bind(this);
+  }
   componentDidMount() {
     try {
       this.props.getProducts();
@@ -15,31 +22,44 @@ class Products extends React.Component {
     }
   }
 
+  paginate(pageNumber) {
+    this.setState({ currentPage: pageNumber });
+  }
+
   render() {
-    const { products, orders } = this.props;
+    const { products, orders, allProducts } = this.props;
+    let idxLastPost = this.state.currentPage * 10;
+    let idxFirstPost = idxLastPost - 10;
+
+    let selected = allProducts
+      ? allProducts.slice(idxFirstPost, idxLastPost)
+      : "";
+    console.log("selected", selected);
+
     return (
       <>
-        <div className="clients-container">
-          {products.map((product) => {
-            return product.variants.map((variant) => (
-              <ProductCard
-                key={variant.id}
-                variant={variant}
-                title={product.title}
-                product={product}
-              />
-            ));
-          })}
-        </div>
+        <SelectedProducts
+          selected={selected}
+          pageCount={this.props.pageCount}
+        />
+        <Pagination
+          postsPerPage={10}
+          pageCount={this.props.pageCount}
+          paginate={this.paginate}
+        />
       </>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  products: state.products,
-  orders: state.orders,
-});
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    products: state.products.products,
+    pageCount: state.products.pageCount,
+    allProducts: state.products.allProducts,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   getProducts: () => dispatch(fetchProducts()),
