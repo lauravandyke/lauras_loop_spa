@@ -18,3 +18,16 @@ router.get("/", async (req, res, next) => {
     next(err);
   }
 });
+
+// router.get("/:orderId", async (req, res, next) => {
+//   try {
+//     Shopify.get(
+//       `/admin/api/2020-04/orders.json?ids=${req.params.orderId}&status=any`,
+//       function (err, data, headers) {
+//         res.json(data);
+//       }
+//     );
+//   } catch (err) {
+//     next(err);
+//   }
+// });

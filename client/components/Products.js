@@ -28,8 +28,8 @@ class Products extends React.Component {
 
   render() {
     const { allProducts } = this.props;
-    let idxLastPost = this.state.currentPage * 10;
-    let idxFirstPost = idxLastPost - 10;
+    let idxLastPost = this.state.currentPage * 15;
+    let idxFirstPost = idxLastPost - 15;
 
     let selected = allProducts
       ? allProducts.slice(idxFirstPost, idxLastPost)
@@ -41,12 +41,10 @@ class Products extends React.Component {
         <SelectedProducts
           selected={selected}
           pageCount={this.props.pageCount}
+          purchasedFreq={this.props.purchasedFreq}
+          sales={this.props.sales}
         />
-        <Pagination
-          postsPerPage={10}
-          pageCount={this.props.pageCount}
-          paginate={this.paginate}
-        />
+        <Pagination pageCount={this.props.pageCount} paginate={this.paginate} />
       </>
     );
   }
@@ -57,6 +55,8 @@ const mapStateToProps = (state) => {
     products: state.products.products,
     pageCount: state.products.pageCount,
     allProducts: state.products.allProducts,
+    purchasedFreq: state.orders.purchasedFreq,
+    sales: state.orders.sales,
   };
 };
 

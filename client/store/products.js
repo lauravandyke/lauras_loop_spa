@@ -3,7 +3,6 @@ import history from "../history";
 
 // ACTION TYPES
 const GET_PRODUCTS = "GET_PRODUCTS";
-const GET_PAGE_COUNT = "GET_PAGE_COUNT";
 
 // ACTION CREATORS
 const getProducts = (products, pageCount, allProducts) => ({
@@ -13,7 +12,7 @@ const getProducts = (products, pageCount, allProducts) => ({
   allProducts,
 });
 
-const getPageCount = (products) => {
+const getInfo = (products) => {
   let itemCount = 0;
   let allProducts = [];
   products.map((product) => {
@@ -24,7 +23,7 @@ const getPageCount = (products) => {
       allProducts.push(variant);
     });
   });
-  return { pageCount: Math.ceil(itemCount / 10), allProducts };
+  return { pageCount: Math.ceil(itemCount / 15), allProducts };
 };
 
 // THUNK CREATORS
@@ -32,7 +31,7 @@ export const fetchProducts = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios.get("/api/products");
-      let { pageCount, allProducts } = getPageCount(data.products);
+      let { pageCount, allProducts } = getInfo(data.products);
       dispatch(getProducts(data.products, pageCount, allProducts));
     } catch (error) {
       console.log(error);
