@@ -5,34 +5,18 @@ import history from "../history";
 const GET_PRODUCTS = "GET_PRODUCTS";
 
 // ACTION CREATORS
-const getProducts = (products, pageCount, allProducts) => ({
+const getProducts = (productInfo) => ({
   type: GET_PRODUCTS,
-  products,
-  pageCount,
-  allProducts,
+  pageCount: productInfo.pageCount,
+  allProducts: productInfo.allProducts,
 });
-
-const getInfo = (products) => {
-  let itemCount = 0;
-  let allProducts = [];
-  products.map((product) => {
-    itemCount += product.variants.length;
-    product.variants.map((variant) => {
-      variant.category = product.title;
-      variant.img = product.image ? product.image.src : "";
-      allProducts.push(variant);
-    });
-  });
-  return { pageCount: Math.ceil(itemCount / 15), allProducts };
-};
 
 // THUNK CREATORS
 export const fetchProducts = () => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.get("/api/products");
-      let { pageCount, allProducts } = getInfo(data.products);
-      dispatch(getProducts(data.products, pageCount, allProducts));
+      const { data: productInfo } = await axios.get("/api/products/info");
+      dispatch(getProducts(productInfo));
     } catch (error) {
       console.log(error);
     }
@@ -44,7 +28,6 @@ const productsReducer = (state = {}, action) => {
   switch (action.type) {
     case GET_PRODUCTS:
       return {
-        products: action.products,
         pageCount: action.pageCount,
         allProducts: action.allProducts,
       };

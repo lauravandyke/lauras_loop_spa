@@ -55,7 +55,7 @@ const mapStateToProps = (state) => {
     products: state.products.products,
     pageCount: state.products.pageCount,
     allProducts: state.products.allProducts,
-    purchasedFreq: state.orders.purchasedFreq,
+    purchasedFreq: state.orders.freq,
     sales: state.orders.sales,
   };
 };
