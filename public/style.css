@@ -20,12 +20,10 @@ form div {
   display: inline-block;
 }
 
-/* NEW STUFF */
-
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  width: 15%;
+  width: 18%;
   text-align: center;
   padding: 10px;
 }
@@ -87,4 +85,12 @@ form div {
 
 .no-top {
   margin-top: 0px;
+}
+
+ul .page-item {
+  display: inline;
+}
+
+.page-item {
+  list-style-type: none;
 }

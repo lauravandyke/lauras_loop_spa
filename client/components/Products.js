@@ -27,17 +27,17 @@ class Products extends React.Component {
   }
 
   render() {
-    const { products, orders, allProducts } = this.props;
+    const { allProducts } = this.props;
     let idxLastPost = this.state.currentPage * 10;
     let idxFirstPost = idxLastPost - 10;
 
     let selected = allProducts
       ? allProducts.slice(idxFirstPost, idxLastPost)
       : "";
-    console.log("selected", selected);
 
     return (
       <>
+        <h1>Laura's Loop SPA</h1>
         <SelectedProducts
           selected={selected}
           pageCount={this.props.pageCount}
@@ -53,7 +53,6 @@ class Products extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     products: state.products.products,
     pageCount: state.products.pageCount,

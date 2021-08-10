@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function ProductCard(props) {
-  console.log("props in card", props);
   let imgSrc = props.product.img
     ? props.product.img
     : "https://www.eduprizeschools.net/wp-content/uploads/2016/06/No_Image_Available.jpg";

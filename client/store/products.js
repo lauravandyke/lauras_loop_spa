@@ -17,7 +17,6 @@ const getPageCount = (products) => {
   let itemCount = 0;
   let allProducts = [];
   products.map((product) => {
-    console.log("product in store", product);
     itemCount += product.variants.length;
     product.variants.map((variant) => {
       variant.category = product.title;
